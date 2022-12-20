@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import PropTypes from 'prop-types';
 
 import { Button } from '../Button/Button';
 import { GlobalStyle } from '../GlobalStyle';
@@ -31,14 +30,11 @@ export class App extends Component {
   async componentDidUpdate(_, prevState) {
     const { page, query } = this.state;
     try {
-      API.obj.params.page = page;
-      API.obj.params.q = query;
-
       if (prevState.page !== page || prevState.query !== query) {
         this.setState({ isLoading: true });
-        const images = await API.fetchImg();
+        const images = await API.fetchImg(page, query);
 
-        if (images === [] || images.length === 0) {
+        if (images.length === 0) {
           toast.error(
             `Sorry, we couldn't find the images by this query: "${query}" . Try something other.`
           );
@@ -52,6 +48,8 @@ export class App extends Component {
         }));
       }
     } catch (error) {
+      this.setState({ isLoading: false });
+
       toast.error(
         `Sorry, something happened. Please, reload page and try one more.`
       );
@@ -59,16 +57,15 @@ export class App extends Component {
   }
 
   onLoadMore = () => {
-    if (this.state.query.length > 0) {
-      this.setState(prevState => ({
-        page: prevState.page + 1,
-      }));
-    }
+    // if (this.state.query.length > 0) {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+    // }
   };
 
   render() {
     const { items, isLoading } = this.state;
-    PropTypes.resetWarningCache();
 
     return (
       <div className={styles.app}>

@@ -14,7 +14,10 @@ export const obj = {
   },
 };
 
-export const fetchImg = async () => {
+export const fetchImg = async (page, query) => {
+  obj.params.page = page;
+  obj.params.q = query;
+
   if (obj.params.q.length === 0) {
     return;
   }
