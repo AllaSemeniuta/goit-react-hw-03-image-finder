@@ -15,32 +15,12 @@ export class ImageGalleryItem extends Component {
   onClickImg = largeSize => {
     document.body.classList.add('noScroll');
     this.setState({ largeSize: largeSize });
-
-    // const image = document.querySelector('#webImage');
-
-    // image.addEventListener('click', this.onCloseModal);
-    document.addEventListener('keydown', this.onCloseModal);
   };
 
   onCloseModal = e => {
-    // const image = document.querySelector('#webImage');
-
-    if (e.currentTarget === e.target) {
-      console.log('клік по бєкдропу');
-      this.setState({ largeSize: null });
-      // image.removeEventListener('click', this.onCloseModal);
-      document.removeEventListener('keydown', this.onCloseModal);
-      return;
-    }
-
-    if (e.code === 'Escape') {
-      console.log('клік по ескейру');
-      this.setState({ largeSize: null });
-      // image.removeEventListener('click', this.onCloseModal);
-      document.removeEventListener('keydown', this.onCloseModal);
-      return;
-    }
+    this.setState({ largeSize: null });
   };
+
   render() {
     const { item } = this.props;
     return (
@@ -56,7 +36,7 @@ export class ImageGalleryItem extends Component {
           <Modal
             largeImg={item.largeSize}
             tags={item.tags}
-            onCloseModal={this.onCloseModal}
+            closeModal={this.onCloseModal}
           />
         )}
       </>

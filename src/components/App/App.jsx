@@ -29,8 +29,8 @@ export class App extends Component {
 
   async componentDidUpdate(_, prevState) {
     const { page, query } = this.state;
-    try {
-      if (prevState.page !== page || prevState.query !== query) {
+    if (prevState.page !== page || prevState.query !== query) {
+      try {
         this.setState({ isLoading: true });
         const images = await API.fetchImg(page, query);
 
@@ -46,13 +46,13 @@ export class App extends Component {
         this.setState(prevState => ({
           items: [...prevState.items, ...images],
         }));
+      } catch (error) {
+        toast.error(
+          `Sorry, something happened. Please, reload page and try one more.`
+        );
+      } finally {
+        this.setState({ isLoading: false });
       }
-    } catch (error) {
-      this.setState({ isLoading: false });
-
-      toast.error(
-        `Sorry, something happened. Please, reload page and try one more.`
-      );
     }
   }
 
