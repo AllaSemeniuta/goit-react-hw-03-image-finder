@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { BsSearch } from 'react-icons/bs';
 import styles from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 
@@ -12,6 +13,7 @@ export class Searchbar extends Component {
   };
 
   handleInput = e => {
+    console.log(e.target.value.trim().toLowerCase());
     this.setState({ query: e.target.value.trim().toLowerCase() });
   };
 
@@ -25,6 +27,7 @@ export class Searchbar extends Component {
       <header className={styles.searchbar}>
         <form className={styles.searchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={styles.button}>
+            <BsSearch size="20px" />
             <span className={styles.label}>Search</span>
           </button>
 

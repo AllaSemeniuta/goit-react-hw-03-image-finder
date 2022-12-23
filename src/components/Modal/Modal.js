@@ -63,7 +63,7 @@ export class Modal extends Component {
   };
 
   render() {
-    const { largeImg, tags, closeModal } = this.props;
+    const { largeImg, tags } = this.props;
 
     return ReactDOM.createPortal(
       <div className={styles.overlay} id="overlay" onClick={this.onCloseModal}>
