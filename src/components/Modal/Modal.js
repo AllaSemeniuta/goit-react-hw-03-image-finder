@@ -35,7 +35,7 @@ export class Modal extends Component {
   static propTypes = {
     largeImg: PropTypes.string.isRequired,
     tags: PropTypes.string,
-    onCloseModal: PropTypes.func,
+    closeModal: PropTypes.func,
   };
 
   componentDidMount() {
